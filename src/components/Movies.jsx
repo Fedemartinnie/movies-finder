@@ -3,10 +3,10 @@ export function ListOfMovies({movies}){
         <ul>
             {
             movies.map(movie => (
-                <li key={movie.imdbID}>
-                    <strong>{movie.Title}</strong>
-                    <h3>{movie.Year}</h3>
-                    <img src={movie.Poster} alt={movie.Title}/>
+                <li key={movie.id}>
+                    <strong>{movie.title}</strong>
+                    <h3>{movie.year}</h3>
+                    <img src={movie.poster} alt={movie.title}/>
                 </li>
                 ))
             }
