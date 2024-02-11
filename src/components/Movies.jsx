@@ -1,9 +1,9 @@
 export function ListOfMovies({movies}){
     return (
-        <ul>
+        <ul className='movies'>
             {
             movies.map(movie => (
-                <li key={movie.id}>
+                <li className='movie' key={movie.id}>
                     <strong>{movie.title}</strong>
                     <h3>{movie.year}</h3>
                     <img src={movie.poster} alt={movie.title}/>
