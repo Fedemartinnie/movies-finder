@@ -10,14 +10,14 @@ export function useMovies({ search, sort }) {
   const previousSearch = useRef(search)
     
 
-  /*const getMovies = useCallback (async({ search }) => {
+  const getMovies = useCallback (async({ search }) => {
     if(search === previousSearch.current) return
 
     try{
       setLoading(true)
       setError(null)
+      previousSearch.current = search
       const newMovies = await searchMovies({ search })
-      //previousSearch.current = search
       setMovies(newMovies)
     } catch (e){
       setError(e.message)
@@ -25,11 +25,11 @@ export function useMovies({ search, sort }) {
       setLoading(false)
     }
   
-  }, []) */
+  }, []) 
 
 
   // no se porque no funciona el parametro dentro del return async({search})
-  const getMovies = useMemo(() => {
+  /*const getMovies = useMemo(() => {
     return async ( ) => {
       if( search === previousSearch.current) return
 
@@ -46,12 +46,12 @@ export function useMovies({ search, sort }) {
         setLoading(false)
       }
     }
-  }, [search]) 
+  }, [search]) */
 
   const sortedMovies = useMemo(() => {
     console.log('memoSortedMovies')
     
-    //if(!movies) return
+    if(!movies) return
     
     return sort 
       ? [...movies].sort((a,b) => a.title.localeCompare(b.title))

@@ -41,7 +41,7 @@ function App() {
 
   const handleSubmit = (event) => { //el event recupera all data from de form
     event.preventDefault() // evita q el formulario se envie y recargue la pagina    
-    getMovies()
+    getMovies({search})
   }  
   
   const handleChange = (event) => {
