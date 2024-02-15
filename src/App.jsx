@@ -19,7 +19,7 @@ function useSearch(){
       return
     }
     if (search.match(/^\d+$/)){
-      setError('No se puiede buscar una pelicula con un numero')
+      setError('No se puede buscar una pelicula con un numero')
       return
     }
     if(search.length<3){
@@ -28,20 +28,20 @@ function useSearch(){
     }
   
     setError(null)
-  }, [search]) //query = dependencia
+  }, [search])
 
   return { search, updateSearch, error }
 }
 
 
-
 function App() {
+  const [sort, setSort] = useState(false)
   const { search, updateSearch, error } = useSearch()
-  const { movies, getMovies } = useMovies({ search })
+  const { movies, loading, getMovies } = useMovies({ search, sort })
 
   const handleSubmit = (event) => { //el event recupera all data from de form
     event.preventDefault() // evita q el formulario se envie y recargue la pagina    
-    getMovies()
+    getMovies({search})
   }  
   
   const handleChange = (event) => {
@@ -49,6 +49,9 @@ function App() {
       getMovies()
   }
   
+  const handleSort = () => {
+    setSort(!sort)
+  }
 
 
   return (
@@ -56,19 +59,25 @@ function App() {
       <header>
         <h1>Buscador de Películas</h1>
         <form className='form' onSubmit={handleSubmit}>
-          <input  style={{
+          <input  
+            style={{
               border: '1px solid transparent',
               borderColor: error ? 'red' : 'transparent'
-            }}onChange={handleChange} value={search} name='query'
+            }} onChange={handleChange} value={search} name='query'
             placeholder='Avengers, Star Wars, Matrix'
           />
+          <input type='checkbox' onChange={handleSort} checked={sort}/>
           <button type='submit'>Buscar</button>      
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
 
       <main>
-        <Movies movies={movies}/>
+      
+      {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        } 
+      
       </main>
     </div>
   )
