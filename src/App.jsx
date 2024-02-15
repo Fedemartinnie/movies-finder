@@ -46,6 +46,7 @@ function App() {
   
   const handleChange = (event) => {
       updateSearch(event.target.value)
+      getMovies()
   }
   
 
